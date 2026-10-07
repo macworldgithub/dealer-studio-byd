@@ -1,0 +1,36 @@
+# Environment & Secret Credentials
+# Prevents leaking session cookies, CSRF tokens, and API keys
+.env
+.env.local
+.env.*.local
+*.env
+
+# Harvested Customer & Lead Data
+# Prevents accidentally committing customer names, emails, and phone numbers
+api_data/
+
+# Python Bytecode & Virtual Environments
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+ENV/
+
+# Logs & Temporary Execution Dumps
+*.log
+logs/
+results.json
+endpoint_check.json
+
+# Operating System & IDE
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
