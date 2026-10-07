@@ -1,0 +1,773 @@
+{
+  "km": 878.0,
+  "odometer_reading": 878.0,
+  "odometer_unit": "kilometer",
+  "before_price": null,
+  "dapprice": 76681.63,
+  "egcprice": 75220.0,
+  "price": 76682,
+  "price_type": "Drive Away",
+  "website_pricing": null,
+  "subscription_price": null,
+  "daily_hire_price": null,
+  "hourly_hire_price": null,
+  "dealercomments": "• 1.5L Turbo DMO Super Hybrid Powertrain\n• 400kW Power & 760Nm Torque\n• 0-100km/h in just 4.8 seconds\n• 18-inch Alloy Wheels in Gunmetal Finish\n• Up to 975km Combined Driving Range (NEDC)\n• Front & Rear Mechanical Differential Locks\n• 3,000kg Braked Towing Capacity\n• 16 Selectable Drive Modes\n• Head Up Display\n• Premium Leather Interior\n• Heated, Ventilated & Massage Front Seats\n• Heated Steering Wheel\n• Built-in Refrigerator & Hot Box\n• 15.6” Touchscreen Infotainment System\n• Wireless Apple CarPlay & Android Auto\n• Premium 800W Devialet 16-Speaker Sound System\n• 360° Camera & Comprehensive Safety Suite\n• NFC Key\n• 50W Wireless Phone Charger x 1 (Front)\n\n\nExperience the exciting arrival of one of Australia’s newest premium brand. Our state-of-the-art dealership, conveniently located just a short drive from Melbourne CBD, offers a modern and welcoming environment where you can explore the latest vehicles and technology in comfort. \n\nWe provide competitive finance solutions, welcome all trade-ins, and can tailor ownership options to suit your individual requirements. Whether you’re upgrading your current vehicle or purchasing your first premium SUV, our experienced team is here to assist every step of the way. \n\nContact us today to arrange a personalised viewing, test drive, or virtual vehicle presentation. We look forward to welcoming you to our dealership and showcasing what this exciting new premium brand has to offer\n",
+  "test_drives_count": 1,
+  "can_show_finance": true,
+  "spin_code": null,
+  "spin_interior_image": false,
+  "id": 1620090,
+  "car_type": "demo",
+  "make": "DENZA",
+  "model": "B5",
+  "badge": "B5",
+  "series": "",
+  "dms_status": null,
+  "body": "SUV",
+  "bodyconfiguration": null,
+  "description": "SF MY26 Wagon 5dr E-CVT 1sp 4x4 600kg 1.5T Hybrid",
+  "simple_body": "SUV",
+  "body_subcategory": "SUV",
+  "trans": "Automatic",
+  "gearnum": 1,
+  "fuel": "PHEV",
+  "simple_fuel": "PHEV",
+  "finance_lenders": {
+    "taurus": {},
+    "manual": {},
+    "mazda_assured": {},
+    "360_finance": {},
+    "angle": {},
+    "nissan_finance": {},
+    "powertorque": {},
+    "ausloans": {},
+    "toyota_finance_australia": {},
+    "volkswagen_financial_services": {},
+    "snowy_river_caravans": {},
+    "youx": {},
+    "bmw_myfinance": {}
+  },
+  "year": 2025,
+  "colour": "Granite Grey",
+  "stocknum": "LC0DD1C4XT5046801",
+  "regplate": "EBM548",
+  "grey_market_import": false,
+  "dealership_id": 2606,
+  "slug": "demo-granite-grey-2025-denza-b5-lc0dd1c4xt5046801",
+  "manufacturer_id": 1464,
+  "name": "2025 DENZA B5",
+  "path": "/cars/demo-granite-grey-2025-denza-b5-lc0dd1c4xt5046801",
+  "status": "in_stock",
+  "dealership_slug": "denza-melbourne",
+  "views": 142,
+  "days_old": 230,
+  "seats": 5,
+  "drive": "4X4 Dual Range",
+  "doors": 5,
+  "simple_transmission": "Automatic",
+  "updated_at": "2026-10-01T04:40:12.484Z",
+  "created_at": "2026-02-19T02:52:02.429Z",
+  "vin": "LC0DD1C4XT5046801",
+  "rego_expiry": "2027-06-30T00:00:00.000Z",
+  "rego_state": "VIC",
+  "tag": "",
+  "reserved": true,
+  "preorder": false,
+  "categories": [],
+  "interior_colour": "Slate Grey",
+  "compliance_date": "2025-12-17",
+  "build_date": "2025-11-01",
+  "carsales_title": null,
+  "fuel_consumption": "1.9",
+  "simple_model": "B5",
+  "autograb_data": {
+    "average_market_price": null,
+    "state_average_market_price": null,
+    "average_market_kms": null,
+    "average_days_to_sell": null,
+    "car_score": null,
+    "car_grade": null,
+    "sample_size": null,
+    "market_days_supply": null,
+    "state_sample_size": null,
+    "price_rank": null
+  },
+  "certified": false,
+  "restrict_third_party": false,
+  "ignore_manufacturer_restriction": false,
+  "blocked_export_destinations": [],
+  "item_type": "car",
+  "custom_features": [],
+  "subscription_pricing": [],
+  "subscription_prices": [],
+  "show_on_dealer_website": true,
+  "advertised_price": "DAP",
+  "sold_date": null,
+  "last_price_change_at": "2026-08-08T00:40:29.292Z",
+  "engine_size_litres": 1498.0,
+  "category": "",
+  "has_redbook": true,
+  "has_nvic": true,
+  "custom_slug": null,
+  "short_vin": "046801",
+  "tare_weight": 2842,
+  "has_tag": false,
+  "has_video": false,
+  "golden": false,
+  "buyer_name": null,
+  "engine_number": "BYD476ZQFT25070158",
+  "enable_enquire_for_price": false,
+  "test_drive_in_progress_lead_id": null,
+  "hours": null,
+  "operating_weight_kg": null,
+  "transmission_type": null,
+  "engine_size": null,
+  "external_video_url": "",
+  "file": null,
+  "cylinders": 4,
+  "features": [
+    "12V Socket(s) - Auxiliary",
+    "16 Speaker Stereo",
+    "18\" Alloy Wheels",
+    "ABS (Antilock Brakes)",
+    "Active Torque Transfer System",
+    "Adjustable Steering Col. - Tilt & Reach",
+    "Airbag - Driver",
+    "Airbag - Front Centre",
+    "Airbag - Passenger",
+    "Airbags - Head for 1st Row Seats (Front)",
+    "Airbags - Head for 2nd Row Seats",
+    "Airbags - Side for 1st Row Occupants (Front)",
+    "Airbags - Side for 2nd Row Occupants (rear)",
+    "Air Cond. - Climate Control 2 Zone",
+    "Air Conditioning - Ionisation",
+    "Air Conditioning - Pollen Filter",
+    "Air Conditioning - Rear",
+    "Ambient Lighting - Interior (User Configurable)",
+    "Audio - Aux Input USB Socket",
+    "Blind Spot Sensor",
+    "Bluetooth System",
+    "Body Colour - Exterior Mirrors Partial",
+    "Brake Assist",
+    "Brakes - Regenerative",
+    "Camera - Front Vision",
+    "Camera - Rear Vision",
+    "Camera - Side Vision",
+    "Central Locking - Remote/Keyless",
+    "Central Locking - Remote/Keyless via App - Internet Dependant",
+    "Centre Console - Cool Box",
+    "Collision Mitigation - Forward (Low speed)",
+    "Collision Mitigation - VRU",
+    "Collision Warning - Forward",
+    "Collision Warning - Rearward",
+    "Collision Warning - VRU",
+    "Control - Electronic Stability",
+    "Control - Park Distance Front",
+    "Control - Park Distance Rear",
+    "Control - Rollover Stability",
+    "Control - Traction",
+    "Cross Traffic Alert - Front",
+    "Cruise Control - Distance Control",
+    "Cruise Control - with Brake Function (limiter)",
+    "Cup Holders - 1st Row",
+    "Daytime Running Lamps - LED",
+    "Diff lock(s)",
+    "Digital Instrument Display - Full",
+    "Disc Brakes Front Ventilated",
+    "Disc Brakes Rear Ventilated",
+    "Driver Attention Detection",
+    "Driving Mode - Selectable",
+    "EBD (Electronic Brake Force Distribution)",
+    "Electric Seat - Drivers",
+    "Electric Seat - Drivers with Massaging",
+    "Electric Seat - Drivers with Memory",
+    "Electric Seat - Passenger",
+    "Electric Seat - Passenger with Massaging",
+    "Fog Lamps - Front",
+    "Fog Lamp/s - Rear",
+    "Glass Roof - with Power Blind",
+    "Headlamps Automatic (light sensitive)",
+    "Headlamps - Corner (Fixed)",
+    "Headlamps - High Beam Active Shadowing",
+    "Headlamps - LED",
+    "Headlamps - See me home",
+    "Headrests - Adjustable 1st Row (Front)",
+    "Headrests - Adjustable 2nd Row x3",
+    "Heated Seats - 1st Row",
+    "Heated Seats - 2nd Row",
+    "Hill Holder",
+    "Information Display - Head Up",
+    "Interior - Contrasting Stitching",
+    "Internet Connectivity via Sim Preparation",
+    "Keyless Start - Remote/Keyless via App - Internet Dependant",
+    "Laminated Side Windows",
+    "Lane Departure Warning",
+    "Lane Keeping - Active Assist",
+    "Leather Seats",
+    "Map/Reading Lamps - for 1st Row",
+    "Map/Reading Lamps - for 2nd Row",
+    "Multi-function Control Screen - Colour",
+    "Multi-function Steering Wheel",
+    "Park Brake - Electric",
+    "Parking Assistance - Automated Steering",
+    "Parking Assist - Graphical Display",
+    "Power Door Mirrors",
+    "Power Door Mirrors - Folding",
+    "Power Door Mirrors - Heated",
+    "Power Door Mirrors - with Memory",
+    "Power Steering",
+    "Power Steering - Electric Assist",
+    "Power Windows - Front & Rear",
+    "Radio - Digital (DAB+)",
+    "Rain Sensor (Auto wipers)",
+    "Rear View Mirror - Electric Anti Glare",
+    "Rear Windows - Extra Dark/Privacy",
+    "Seatbelt - Pretensioners 1st Row (Front)",
+    "Seatbelt - Pretensioners 1st Row (Outer Seats)",
+    "Seatbelts - Lap/Sash for 5 seats",
+    "Seat - Driver with Electric Lumbar"
+  ],
+  "grouped_features": [
+    {
+      "group": "Safety & Security",
+      "name": "Airbags",
+      "value": "Airbag - Passenger"
+    },
+    {
+      "group": "Brakes",
+      "name": "Features",
+      "value": "Brake Assist"
+    },
+    {
+      "group": "Safety & Security",
+      "name": "Driver Assistance",
+      "value": "Camera - Rear Vision"
+    },
+    {
+      "group": "Safety & Security",
+      "name": "Vehicle Control",
+      "value": "Hill Holder"
+    },
+    {
+      "group": "Safety & Security",
+      "name": "Vehicle Control",
+      "value": "Lane Departure Warning"
+    },
+    {
+      "group": "Seating",
+      "name": "Features",
+      "value": "Leather Seats"
+    },
+    {
+      "group": "Steering",
+      "name": "Power Steering",
+      "value": "Power Steering"
+    }
+  ],
+  "video_url": "",
+  "videos": [],
+  "walkaround_videos": [],
+  "certified_type": null,
+  "subscription_url": null,
+  "reservable": true,
+  "test_drive_only": false,
+  "photos_count": 22,
+  "primary_image_url_avif": null,
+  "thumbnails_avif": [],
+  "custom_attributes": [],
+  "private_postcode": null,
+  "private_suburb": "",
+  "appraiser": null,
+  "specifications": {
+    "gvm": "",
+    "first_priced_at": "2026-07-20T22:24:48.750Z",
+    "previous_ftp_files_checked_at": "2026-02-19T02:52:36.716Z"
+  },
+  "gvm": "",
+  "gcm": null,
+  "power": null,
+  "model_code": null,
+  "product_code": "19670644-00",
+  "registration_date": null,
+  "manufacturer_warranty_expiry": null,
+  "motor_number_front": null,
+  "model_year": 2025,
+  "price_changes_count": 0,
+  "variant": {
+    "ancaprating": "5",
+    "fuelconsumptioncombined": 1,
+    "wheelbase": "2800",
+    "vehicleheight": 1920,
+    "vehiclelength": 4888,
+    "vehiclewidth": 1970,
+    "grossvehiclemass": 3497,
+    "torque": 260,
+    "payload": 600,
+    "fuelcapacity": 83,
+    "enginesize": 1498,
+    "enginesize_litres": 1.5,
+    "cylinders": 4,
+    "doorno": 5,
+    "induction": "Turbo Intercooled",
+    "bodyconfiguration": null,
+    "geartype": "Constantly Variable Transmission",
+    "yeargroupyear": 2025,
+    "enginetype": "Piston - Electric",
+    "fueltype": "Petrol - Unleaded ULP",
+    "enginesizelitres": "1.5",
+    "towingcapacitybraked": 3000,
+    "towingcapacityunbraked": 750
+  },
+  "images": [
+    {
+      "id": 58408039,
+      "image": {
+        "url": "https://d2s8i866417m9.cloudfront.net/photo/58408039/photo/medium-a0b14af0daa9c33ffbe44d42f0688127.jpg",
+        "thumb": {
+          "url": "https://d2s8i866417m9.cloudfront.net/photo/58408039/photo/thumb-69d912f2c1ceb3b93ae20f1721edffe9.jpg"
+        }
+      },
+      "effects": [],
+      "stock_image": false,
+      "labels": [],
+      "visible": true,
+      "photoable_id": 1620090,
+      "image_type": "car",
+      "revertable": false
+    },
+    {
+      "id": 58408041,
+      "image": {
+        "url": "https://d2s8i866417m9.cloudfront.net/photo/58408041/photo/medium-c93a2ce816899a2cead3e3a2c712d0ba.jpg",
+        "thumb": {
+          "url": "https://d2s8i866417m9.cloudfront.net/photo/58408041/photo/thumb-24cdbe55950b1d7c119e41b9ab64f7af.jpg"
+        }
+      },
+      "effects": [],
+      "stock_image": false,
+      "labels": [],
+      "visible": true,
+      "photoable_id": 1620090,
+      "image_type": "car",
+      "revertable": false
+    },
+    {
+      "id": 58408044,
+      "image": {
+        "url": "https://d2s8i866417m9.cloudfront.net/photo/58408044/photo/medium-b3b79cf59940138c504d75dfb7b20a9e.jpg",
+        "thumb": {
+          "url": "https://d2s8i866417m9.cloudfront.net/photo/58408044/photo/thumb-e838608c0072068cbcd5d94c1989e327.jpg"
+        }
+      },
+      "effects": [],
+      "stock_image": false,
+      "labels": [],
+      "visible": true,
+      "photoable_id": 1620090,
+      "image_type": "car",
+      "revertable": false
+    },
+    {
+      "id": 58408043,
+      "image": {
+        "url": "https://d2s8i866417m9.cloudfront.net/photo/58408043/photo/medium-385fd084eb855ac0b78431899c7015b9.jpg",
+        "thumb": {
+          "url": "https://d2s8i866417m9.cloudfront.net/photo/58408043/photo/thumb-a18c5b762102df18c6743224335b9d82.jpg"
+        }
+      },
+      "effects": [],
+      "stock_image": false,
+      "labels": [],
+      "visible": true,
+      "photoable_id": 1620090,
+      "image_type": "car",
+      "revertable": false
+    },
+    {
+      "id": 58408045,
+      "image": {
+        "url": "https://d2s8i866417m9.cloudfront.net/photo/58408045/photo/medium-f24eeb6c56ea3538ca43ae1f172b996d.jpg",
+        "thumb": {
+          "url": "https://d2s8i866417m9.cloudfront.net/photo/58408045/photo/thumb-4125f1f3f727febda756ebb71e44b5b6.jpg"
+        }
+      },
+      "effects": [],
+      "stock_image": false,
+      "labels": [],
+      "visible": true,
+      "photoable_id": 1620090,
+      "image_type": "car",
+      "revertable": false
+    },
+    {
+      "id": 58408040,
+      "image": {
+        "url": "https://d2s8i866417m9.cloudfront.net/photo/58408040/photo/medium-1b859fb4405cf3fe0958793c870f8a6b.jpg",
+        "thumb": {
+          "url": "https://d2s8i866417m9.cloudfront.net/photo/58408040/photo/thumb-26d831a8285ea9aafbaca67949e1edc4.jpg"
+        }
+      },
+      "effects": [],
+      "stock_image": false,
+      "labels": [],
+      "visible": true,
+      "photoable_id": 1620090,
+      "image_type": "car",
+      "revertable": false
+    },
+    {
+      "id": 58408042,
+      "image": {
+        "url": "https://d2s8i866417m9.cloudfront.net/photo/58408042/photo/medium-b51bfab7ac8c8b3df4642bc87dbbc6f5.jpg",
+        "thumb": {
+          "url": "https://d2s8i866417m9.cloudfront.net/photo/58408042/photo/thumb-d3b86c4eaddad13618e4f618e07f3af5.jpg"
+        }
+      },
+      "effects": [],
+      "stock_image": false,
+      "labels": [],
+      "visible": true,
+      "photoable_id": 1620090,
+      "image_type": "car",
+      "revertable": false
+    },
+    {
+      "id": 58408047,
+      "image": {
+        "url": "https://d2s8i866417m9.cloudfront.net/photo/58408047/photo/medium-916a47ca320e402212f4bced6323f089.jpg",
+        "thumb": {
+          "url": "https://d2s8i866417m9.cloudfront.net/photo/58408047/photo/thumb-44f21abcd077c7e39a5e364a2a130fee.jpg"
+        }
+      },
+      "effects": [],
+      "stock_image": false,
+      "labels": [],
+      "visible": true,
+      "photoable_id": 1620090,
+      "image_type": "car",
+      "revertable": false
+    },
+    {
+      "id": 58408046,
+      "image": {
+        "url": "https://d2s8i866417m9.cloudfront.net/photo/58408046/photo/medium-b12e7426c9688fefdf2a8ef5ec777cbb.jpg",
+        "thumb": {
+          "url": "https://d2s8i866417m9.cloudfront.net/photo/58408046/photo/thumb-bfe733f1a71bb33823efd5e68ca7c855.jpg"
+        }
+      },
+      "effects": [],
+      "stock_image": false,
+      "labels": [],
+      "visible": true,
+      "photoable_id": 1620090,
+      "image_type": "car",
+      "revertable": false
+    },
+    {
+      "id": 58408048,
+      "image": {
+        "url": "https://d2s8i866417m9.cloudfront.net/photo/58408048/photo/medium-a4a9b341f620714bb662f64dcbbf1137.jpg",
+        "thumb": {
+          "url": "https://d2s8i866417m9.cloudfront.net/photo/58408048/photo/thumb-c7afe1fee780f2df7f724b90311410aa.jpg"
+        }
+      },
+      "effects": [],
+      "stock_image": false,
+      "labels": [],
+      "visible": true,
+      "photoable_id": 1620090,
+      "image_type": "car",
+      "revertable": false
+    },
+    {
+      "id": 58408049,
+      "image": {
+        "url": "https://d2s8i866417m9.cloudfront.net/photo/58408049/photo/medium-e536ae1cc5b6744c7943f3b211551144.jpg",
+        "thumb": {
+          "url": "https://d2s8i866417m9.cloudfront.net/photo/58408049/photo/thumb-41e58bd240eeb6403f35dbc646b16995.jpg"
+        }
+      },
+      "effects": [],
+      "stock_image": false,
+      "labels": [],
+      "visible": true,
+      "photoable_id": 1620090,
+      "image_type": "car",
+      "revertable": false
+    },
+    {
+      "id": 58408052,
+      "image": {
+        "url": "https://d2s8i866417m9.cloudfront.net/photo/58408052/photo/medium-60a8367ba0c322f586de351369cd291d.jpg",
+        "thumb": {
+          "url": "https://d2s8i866417m9.cloudfront.net/photo/58408052/photo/thumb-9a997d6e100ff1770a7eab79b26e6f7f.jpg"
+        }
+      },
+      "effects": [],
+      "stock_image": false,
+      "labels": [],
+      "visible": true,
+      "photoable_id": 1620090,
+      "image_type": "car",
+      "revertable": false
+    },
+    {
+      "id": 58408050,
+      "image": {
+        "url": "https://d2s8i866417m9.cloudfront.net/photo/58408050/photo/medium-b99a22d43fe2eae524feafc06e7296ba.jpg",
+        "thumb": {
+          "url": "https://d2s8i866417m9.cloudfront.net/photo/58408050/photo/thumb-3ab54f4705530a0ce68d50a48c7a06d1.jpg"
+        }
+      },
+      "effects": [],
+      "stock_image": false,
+      "labels": [],
+      "visible": true,
+      "photoable_id": 1620090,
+      "image_type": "car",
+      "revertable": false
+    },
+    {
+      "id": 58408051,
+      "image": {
+        "url": "https://d2s8i866417m9.cloudfront.net/photo/58408051/photo/medium-ff7bb9ec50e3a7b789297a0cd4ec3537.jpg",
+        "thumb": {
+          "url": "https://d2s8i866417m9.cloudfront.net/photo/58408051/photo/thumb-869dae4e90cc295048e05c47a7511bab.jpg"
+        }
+      },
+      "effects": [],
+      "stock_image": false,
+      "labels": [],
+      "visible": true,
+      "photoable_id": 1620090,
+      "image_type": "car",
+      "revertable": false
+    },
+    {
+      "id": 58408053,
+      "image": {
+        "url": "https://d2s8i866417m9.cloudfront.net/photo/58408053/photo/medium-e1c994b6d12ba56b53bc4a3d541b5736.jpg",
+        "thumb": {
+          "url": "https://d2s8i866417m9.cloudfront.net/photo/58408053/photo/thumb-e94448f45a03b6026e070c98d34176b4.jpg"
+        }
+      },
+      "effects": [],
+      "stock_image": false,
+      "labels": [],
+      "visible": true,
+      "photoable_id": 1620090,
+      "image_type": "car",
+      "revertable": false
+    },
+    {
+      "id": 58408054,
+      "image": {
+        "url": "https://d2s8i866417m9.cloudfront.net/photo/58408054/photo/medium-a405ecee2de6f0aec713d348fb3e7513.jpg",
+        "thumb": {
+          "url": "https://d2s8i866417m9.cloudfront.net/photo/58408054/photo/thumb-03b80f038bdc9ba220f312fe21a9dac5.jpg"
+        }
+      },
+      "effects": [],
+      "stock_image": false,
+      "labels": [],
+      "visible": true,
+      "photoable_id": 1620090,
+      "image_type": "car",
+      "revertable": false
+    },
+    {
+      "id": 58408055,
+      "image": {
+        "url": "https://d2s8i866417m9.cloudfront.net/photo/58408055/photo/medium-3834146d2dc15926290fa38dc1794258.jpg",
+        "thumb": {
+          "url": "https://d2s8i866417m9.cloudfront.net/photo/58408055/photo/thumb-3f685ae5701525e47bf1878d6dd3f397.jpg"
+        }
+      },
+      "effects": [],
+      "stock_image": false,
+      "labels": [],
+      "visible": true,
+      "photoable_id": 1620090,
+      "image_type": "car",
+      "revertable": false
+    },
+    {
+      "id": 58408058,
+      "image": {
+        "url": "https://d2s8i866417m9.cloudfront.net/photo/58408058/photo/medium-230eb3961717f8a7408d9ffe60f9fd17.jpg",
+        "thumb": {
+          "url": "https://d2s8i866417m9.cloudfront.net/photo/58408058/photo/thumb-62233035518ea4156a7f399936ff99b2.jpg"
+        }
+      },
+      "effects": [],
+      "stock_image": false,
+      "labels": [],
+      "visible": true,
+      "photoable_id": 1620090,
+      "image_type": "car",
+      "revertable": false
+    },
+    {
+      "id": 58408059,
+      "image": {
+        "url": "https://d2s8i866417m9.cloudfront.net/photo/58408059/photo/medium-d521f8ea35179594568d2f7e73bd0e9f.jpg",
+        "thumb": {
+          "url": "https://d2s8i866417m9.cloudfront.net/photo/58408059/photo/thumb-31ebae27bbde850f4f3cb6d9b284309f.jpg"
+        }
+      },
+      "effects": [],
+      "stock_image": false,
+      "labels": [],
+      "visible": true,
+      "photoable_id": 1620090,
+      "image_type": "car",
+      "revertable": false
+    },
+    {
+      "id": 58408056,
+      "image": {
+        "url": "https://d2s8i866417m9.cloudfront.net/photo/58408056/photo/medium-8ff1161aafb96c96a00ff0017b1329db.jpg",
+        "thumb": {
+          "url": "https://d2s8i866417m9.cloudfront.net/photo/58408056/photo/thumb-8f819a2cd977c57fc946100426da75f2.jpg"
+        }
+      },
+      "effects": [],
+      "stock_image": false,
+      "labels": [],
+      "visible": true,
+      "photoable_id": 1620090,
+      "image_type": "car",
+      "revertable": false
+    },
+    {
+      "id": 58408060,
+      "image": {
+        "url": "https://d2s8i866417m9.cloudfront.net/photo/58408060/photo/medium-6bba02fab253505a15e45286872d9b92.jpg",
+        "thumb": {
+          "url": "https://d2s8i866417m9.cloudfront.net/photo/58408060/photo/thumb-c61bf975a2f9258aeb40fbec80aa435b.jpg"
+        }
+      },
+      "effects": [],
+      "stock_image": false,
+      "labels": [],
+      "visible": true,
+      "photoable_id": 1620090,
+      "image_type": "car",
+      "revertable": false
+    },
+    {
+      "id": 58408057,
+      "image": {
+        "url": "https://d2s8i866417m9.cloudfront.net/photo/58408057/photo/medium-5adce6965bd059808281fb776fadc315.jpg",
+        "thumb": {
+          "url": "https://d2s8i866417m9.cloudfront.net/photo/58408057/photo/thumb-78e14e9dc6eb6cd507ef6ff564da2a0b.jpg"
+        }
+      },
+      "effects": [],
+      "stock_image": false,
+      "labels": [],
+      "visible": true,
+      "photoable_id": 1620090,
+      "image_type": "car",
+      "revertable": false
+    }
+  ],
+  "payment_processors": [
+    {
+      "id": 534,
+      "authorization_type": "stripe",
+      "authorization_key": "pk_live_51ScfjpJWpgv0Rd1wugcH1zrjhs4Ru93QzHeDLw6EqkAZWLcbuW2YgPMwvtIQSi6Ocbdg7HhernGslpR0hE3ra0XU00j0T4WbY0",
+      "merchant_id": null,
+      "deposit_amount": "1000.0",
+      "apple_pay_enabled": true,
+      "google_pay_enabled": false,
+      "google_merchant_id": null
+    }
+  ],
+  "third_party_integrations": [],
+  "location": {
+    "id": 7898,
+    "phone": "03 8904 8888",
+    "place_id": "",
+    "name": "DENZA Melbourne",
+    "review_count": 0,
+    "average_rating": null,
+    "dealer_license_number": "MCT0012833",
+    "visible": true,
+    "slug": "denza-melbourne",
+    "distribution_locations": [],
+    "subdomain": "",
+    "address": {
+      "id": 5468,
+      "street": "210 Kings Way",
+      "city": "South Melbourne",
+      "state": "VIC",
+      "postcode": 3205,
+      "lat": "-37.8299923",
+      "long": "144.9638509",
+      "map_key": "m3gwj4tdym8fcbc4g52q1jvzpxn2",
+      "place_id": "ChIJeUkE9qpC1moR_UYZC6W0uMo",
+      "place_url": "https://maps.google.com/?q=place_id:ChIJeUkE9qpC1moR_UYZC6W0uMo"
+    },
+    "contact_detail": {
+      "phone": "03 8904 8888",
+      "email": null,
+      "facebook_url": "",
+      "instagram_url": "",
+      "tiktok_url": "",
+      "mobile": "",
+      "opening_hours": [
+        {
+          "weekday": 0,
+          "status": "Closed",
+          "formated_hours": "Closed",
+          "open": "10:00am",
+          "close": "4:00pm"
+        },
+        {
+          "weekday": 1,
+          "status": "Open",
+          "formated_hours": "8:30am-5:30pm",
+          "open": "8:30am",
+          "close": "5:30pm"
+        },
+        {
+          "weekday": 2,
+          "status": "Open",
+          "formated_hours": "8:30am-5:30pm",
+          "open": "8:30am",
+          "close": "5:30pm"
+        },
+        {
+          "weekday": 3,
+          "status": "Open",
+          "formated_hours": "8:30am-5:30pm",
+          "open": "8:30am",
+          "close": "5:30pm"
+        },
+        {
+          "weekday": 4,
+          "status": "Open",
+          "formated_hours": "8:30am-5:30pm",
+          "open": "8:30am",
+          "close": "5:30pm"
+        },
+        {
+          "weekday": 5,
+          "status": "Open",
+          "formated_hours": "8:30am-5:30pm",
+          "open": "8:30am",
+          "close": "5:30pm"
+        },
+        {
+          "weekday": 6,
+          "status": "Open",
+          "formated_hours": "9:00am-5:00pm",
+          "open": "9:00am",
+          "close": "5:00pm"
+        }
+      ]
+    },
+    "location_external_codes": []
+  }
+}

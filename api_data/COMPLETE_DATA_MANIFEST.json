@@ -1,0 +1,19 @@
+{
+  "timestamp": "2026-10-07 17:09:00",
+  "dealership_slug": "denza-melbourne",
+  "dealership_id": "2606",
+  "elapsed_seconds": 58.3,
+  "statistics": {
+    "total_historic_leads": 3313,
+    "total_active_leads": 758,
+    "total_cars_in_stock": 13
+  },
+  "exported_files": [
+    "all_lead_clusters_3313.json",
+    "active_lead_clusters_758.json",
+    "all_cars_inventory_13.json",
+    "all_cars_detailed_specs.json",
+    "cars_detailed/ (13 individual car JSON specs)",
+    "lead_clusters_pages/ (All individual pagination JSONs)"
+  ]
+}

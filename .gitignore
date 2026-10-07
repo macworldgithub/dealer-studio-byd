@@ -5,9 +5,6 @@
 .env.*.local
 *.env
 
-# Harvested Customer & Lead Data
-# Prevents accidentally committing customer names, emails, and phone numbers
-api_data/
 
 # Python Bytecode & Virtual Environments
 __pycache__/
