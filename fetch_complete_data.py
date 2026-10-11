@@ -15,6 +15,7 @@ import sys
 import json
 import time
 import math
+import glob
 import httpx
 from dotenv import load_dotenv
 
@@ -74,9 +75,17 @@ def fetch_with_retry(client: httpx.Client, url: str, params: dict = None, retrie
 
 def harvest_lead_clusters(client: httpx.Client, active_only: bool = False):
     label = "Active" if active_only else "All (Historic + Active)"
+    prefix = "active" if active_only else "all"
     log(f"\n==================================================")
     log(f"[*] Harvesting {label} Lead Clusters...")
     log(f"==================================================")
+
+    # Clean old pagination files for this prefix to prevent stale ghost pages
+    for old_file in glob.glob(os.path.join(LEADS_PAGES_DIR, f"{prefix}_page_*.json")):
+        try:
+            os.remove(old_file)
+        except OSError:
+            pass
 
     url = f"{BASE_URL}/dealerships/{DEALERSHIP_SLUG}/lead_clusters/postgres_search"
     rows_per_page = 100
@@ -115,7 +124,6 @@ def harvest_lead_clusters(client: httpx.Client, active_only: bool = False):
         log(f"    [OK] Page {page}: Received {len(clusters)} leads. Total accumulated: {len(all_clusters)} / {total_count}")
 
         # Save individual page
-        prefix = "active" if active_only else "all"
         page_file = os.path.join(LEADS_PAGES_DIR, f"{prefix}_page_{page:02d}.json")
         safe_save_json(page_file, data)
 
@@ -125,17 +133,30 @@ def harvest_lead_clusters(client: httpx.Client, active_only: bool = False):
         page += 1
         time.sleep(0.3)  # Gentle delay
 
-    # Save consolidated file
-    filename = "active_lead_clusters_758.json" if active_only else "all_lead_clusters_3313.json"
-    consolidated_path = os.path.join(BASE_DATA_DIR, filename)
-    safe_save_json(consolidated_path, {
+    # Save consolidated files (dynamic count, canonical, and legacy compatibility)
+    total_harvested = len(all_clusters)
+    consolidated_data = {
         "dealership_slug": DEALERSHIP_SLUG,
         "dealership_id": DEALERSHIP_ID,
         "filter": "active_only" if active_only else "all",
-        "total_harvested": len(all_clusters),
+        "total_harvested": total_harvested,
         "lead_clusters": all_clusters
-    })
-    log(f"[COMPLETE] Saved {len(all_clusters)} {label} leads to api_data/{filename} ({os.path.getsize(consolidated_path):,} bytes)")
+    }
+
+    # 1. Dynamic count filename
+    dynamic_filename = f"active_lead_clusters_{total_harvested}.json" if active_only else f"all_lead_clusters_{total_harvested}.json"
+    safe_save_json(os.path.join(BASE_DATA_DIR, dynamic_filename), consolidated_data)
+
+    # 2. Canonical un-suffixed filename
+    canonical_filename = "active_lead_clusters.json" if active_only else "all_lead_clusters.json"
+    safe_save_json(os.path.join(BASE_DATA_DIR, canonical_filename), consolidated_data)
+
+    # 3. Legacy filename for backwards-compatibility with existing sync scripts
+    legacy_filename = "active_lead_clusters_758.json" if active_only else "all_lead_clusters_3313.json"
+    legacy_path = os.path.join(BASE_DATA_DIR, legacy_filename)
+    safe_save_json(legacy_path, consolidated_data)
+
+    log(f"[COMPLETE] Saved {total_harvested} {label} leads to api_data/{dynamic_filename} and legacy {legacy_filename} ({os.path.getsize(legacy_path):,} bytes)")
     return all_clusters
 
 
@@ -143,6 +164,13 @@ def harvest_cars_and_details(client: httpx.Client):
     log(f"\n==================================================")
     log(f"[*] Harvesting Full Cars Inventory & Specs...")
     log(f"==================================================")
+
+    # Clean old detailed car JSON files
+    for old_file in glob.glob(os.path.join(CARS_DIR, "car_*.json")):
+        try:
+            os.remove(old_file)
+        except OSError:
+            pass
 
     url = f"{BASE_URL}/dealerships/{DEALERSHIP_SLUG}/cars"
     cars_data = fetch_with_retry(client, url, {"per_page": 100})
@@ -152,8 +180,13 @@ def harvest_cars_and_details(client: httpx.Client):
         return []
 
     log(f"[OK] Found {len(cars_data)} vehicles in stock. Saving inventory list...")
-    inv_path = os.path.join(BASE_DATA_DIR, "all_cars_inventory_13.json")
-    safe_save_json(inv_path, cars_data)
+    # Dynamic, canonical, and legacy inventory files
+    inv_dynamic = os.path.join(BASE_DATA_DIR, f"all_cars_inventory_{len(cars_data)}.json")
+    inv_canonical = os.path.join(BASE_DATA_DIR, "all_cars_inventory.json")
+    inv_legacy = os.path.join(BASE_DATA_DIR, "all_cars_inventory_13.json")
+    safe_save_json(inv_dynamic, cars_data)
+    safe_save_json(inv_canonical, cars_data)
+    safe_save_json(inv_legacy, cars_data)
 
     detailed_cars = []
     for idx, car in enumerate(cars_data, 1):
@@ -188,10 +221,10 @@ def main():
     start_time = time.time()
 
     with httpx.Client(timeout=30.0, follow_redirects=True) as client:
-        # 1. Harvest ALL 3,313 leads (all pages)
+        # 1. Harvest ALL leads (all pages)
         all_leads = harvest_lead_clusters(client, active_only=False)
 
-        # 2. Harvest 758 active leads
+        # 2. Harvest active leads
         active_leads = harvest_lead_clusters(client, active_only=True)
 
         # 3. Harvest All Cars & Detailed Specs
@@ -210,11 +243,17 @@ def main():
                 "total_cars_in_stock": len(cars)
             },
             "exported_files": [
-                "all_lead_clusters_3313.json",
-                "active_lead_clusters_758.json",
-                "all_cars_inventory_13.json",
+                f"all_lead_clusters_{len(all_leads)}.json",
+                f"active_lead_clusters_{len(active_leads)}.json",
+                f"all_cars_inventory_{len(cars)}.json",
+                "all_lead_clusters.json",
+                "active_lead_clusters.json",
+                "all_cars_inventory.json",
+                "all_lead_clusters_3313.json (backwards-compatible)",
+                "active_lead_clusters_758.json (backwards-compatible)",
+                "all_cars_inventory_13.json (backwards-compatible)",
                 "all_cars_detailed_specs.json",
-                "cars_detailed/ (13 individual car JSON specs)",
+                f"cars_detailed/ ({len(cars)} individual car JSON specs)",
                 "lead_clusters_pages/ (All individual pagination JSONs)"
             ]
         }

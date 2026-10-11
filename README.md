@@ -8,27 +8,27 @@ Complete dataset extracted for Dealership **DENZA Melbourne** (`denza-melbourne`
 
 | Resource | Count | Master File | Detailed Files Folder |
 | :--- | :---: | :--- | :--- |
-| **All Historic & Active Leads** | **3,313** | [all_lead_clusters_3313.json](file:///d:/new-proj/api_data/all_lead_clusters_3313.json) (7.9 MB) | [lead_clusters_pages/](file:///d:/new-proj/api_data/lead_clusters_pages/) (34 pages) |
-| **Active Pipeline Leads** | **758** | [active_lead_clusters_758.json](file:///d:/new-proj/api_data/active_lead_clusters_758.json) (1.8 MB) | [lead_clusters_pages/](file:///d:/new-proj/api_data/lead_clusters_pages/) (8 pages) |
-| **Complete Car Inventory** | **13** | [all_cars_inventory_13.json](file:///d:/new-proj/api_data/all_cars_inventory_13.json) (223 KB) | — |
-| **Full Car Specifications** | **13** | [all_cars_detailed_specs.json](file:///d:/new-proj/api_data/all_cars_detailed_specs.json) (223 KB) | [cars_detailed/](file:///d:/new-proj/api_data/cars_detailed/) (13 vehicle JSONs) |
-| **Manifest** | — | [COMPLETE_DATA_MANIFEST.json](file:///d:/new-proj/api_data/COMPLETE_DATA_MANIFEST.json) | Full execution statistics |
+| **All Historic & Active Leads** | **3,369** | [all_lead_clusters_3369.json](file:///d:/sales-floor/denza-data/dealer-studio-byd/api_data/all_lead_clusters_3369.json) (8.2 MB) | [lead_clusters_pages/](file:///d:/sales-floor/denza-data/dealer-studio-byd/api_data/lead_clusters_pages/) (34 pages) |
+| **Active Pipeline Leads** | **695** | [active_lead_clusters_695.json](file:///d:/sales-floor/denza-data/dealer-studio-byd/api_data/active_lead_clusters_695.json) (1.7 MB) | [lead_clusters_pages/](file:///d:/sales-floor/denza-data/dealer-studio-byd/api_data/lead_clusters_pages/) (7 pages) |
+| **Complete Car Inventory** | **12** | [all_cars_inventory_12.json](file:///d:/sales-floor/denza-data/dealer-studio-byd/api_data/all_cars_inventory_12.json) (197 KB) | — |
+| **Full Car Specifications** | **12** | [all_cars_detailed_specs.json](file:///d:/sales-floor/denza-data/dealer-studio-byd/api_data/all_cars_detailed_specs.json) (197 KB) | [cars_detailed/](file:///d:/sales-floor/denza-data/dealer-studio-byd/api_data/cars_detailed/) (12 vehicle JSONs) |
+| **Manifest** | — | [COMPLETE_DATA_MANIFEST.json](file:///d:/sales-floor/denza-data/dealer-studio-byd/api_data/COMPLETE_DATA_MANIFEST.json) | Full execution statistics |
 
 ---
 
 ## Directory Structure
 
 ```text
-d:\new-proj\api_data\
+d:\sales-floor\denza-data\dealer-studio-byd\api_data\
 ├── COMPLETE_DATA_MANIFEST.json      <- Harvest metadata & statistics
-├── all_lead_clusters_3313.json      <- All 3,313 leads (all pages combined)
-├── active_lead_clusters_758.json    <- All 758 active leads
-├── all_cars_inventory_13.json       <- Complete 13 vehicles in stock
+├── all_lead_clusters_3369.json      <- All 3,369 leads (all pages combined)
+├── active_lead_clusters_695.json    <- All 695 active leads
+├── all_cars_inventory_12.json       <- Complete 12 vehicles in stock
 ├── all_cars_detailed_specs.json     <- Full vehicle specs, options & pricing
-├── lead_clusters_pages/             <- 42 individual pagination JSON files:
+├── lead_clusters_pages/             <- 41 individual pagination JSON files:
 │   ├── all_page_01.json ... all_page_34.json
-│   └── active_page_01.json ... active_page_08.json
-└── cars_detailed/                   <- 13 individual car JSON files:
+│   └── active_page_01.json ... active_page_07.json
+└── cars_detailed/                   <- 12 individual car JSON files:
     ├── car_1620089_B5.json
     ├── car_1672689_B8.json
     └── ...
