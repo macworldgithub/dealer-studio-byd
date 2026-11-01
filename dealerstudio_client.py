@@ -19,6 +19,7 @@ import logging
 from typing import Optional, Dict, Any, List, Union
 import httpx
 from dotenv import load_dotenv
+from dealerstudio_session import DealerStudioSession
 
 load_dotenv()
 
@@ -232,7 +233,7 @@ class DealerStudioClient:
         self.leads = LeadsResource(self)
         self.dealerships = DealershipsResource(self)
 
-        self._http = httpx.Client(timeout=self.timeout, follow_redirects=True)
+        self._http = DealerStudioSession(config={**os.environ, 'DEALERSTUDIO_COOKIE': self.cookie, 'DEALERSTUDIO_CSRF_TOKEN': self.csrf_token, 'DEALERSTUDIO_API_KEY': self.api_key or '', 'DEALERSTUDIO_DEALERSHIP_SLUG': self.dealership_slug})
 
     def _get_headers(self) -> Dict[str, str]:
         headers = {

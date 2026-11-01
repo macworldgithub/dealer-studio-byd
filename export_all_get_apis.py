@@ -11,6 +11,7 @@ import logging
 from typing import Dict, Any
 import httpx
 from dotenv import load_dotenv
+from dealerstudio_session import DealerStudioSession
 
 load_dotenv()
 
@@ -86,7 +87,8 @@ def run_all_exports():
         "files_generated": []
     }
 
-    with httpx.Client(timeout=25.0, follow_redirects=True) as client:
+    with DealerStudioSession() as client:
+        client.renew()
         # 1. Lead Clusters Postgres Search
         status, search_data = fetch_and_save(
             client=client,

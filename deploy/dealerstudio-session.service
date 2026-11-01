@@ -1,0 +1,12 @@
+[Unit]
+Description=Renew the Dealer Studio session
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=oneshot
+WorkingDirectory=/var/www/dealer-studio-byd
+Environment=PYTHONDONTWRITEBYTECODE=1
+UMask=0077
+TimeoutStartSec=3min
+ExecStart=/var/www/dealer-studio-byd/.venv/bin/python /var/www/dealer-studio-byd/session_task.py

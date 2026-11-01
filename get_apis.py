@@ -9,6 +9,7 @@ import os
 import json
 import httpx
 from dotenv import load_dotenv
+from dealerstudio_session import DealerStudioSession
 
 load_dotenv()
 
@@ -93,7 +94,8 @@ def main():
     print(f"Dealership: {DEALERSHIP_SLUG} (ID: {DEALERSHIP_ID})")
     print("=" * 70)
 
-    with httpx.Client(timeout=15.0, follow_redirects=True) as client:
+    with DealerStudioSession() as client:
+        client.renew()
         for idx, ep in enumerate(ENDPOINTS, 1):
             category = ep["category"]
             name = ep["name"]

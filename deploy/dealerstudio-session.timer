@@ -1,0 +1,11 @@
+[Unit]
+Description=Renew the Dealer Studio session every five minutes
+
+[Timer]
+OnBootSec=1min
+OnUnitActiveSec=5min
+AccuracySec=1s
+Unit=dealerstudio-session.service
+
+[Install]
+WantedBy=timers.target

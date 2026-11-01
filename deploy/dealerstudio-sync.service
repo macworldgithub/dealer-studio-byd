@@ -1,0 +1,16 @@
+[Unit]
+Description=Fetch Dealer Studio and upsert Denza Melbourne data
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=oneshot
+WorkingDirectory=/var/www/dealer-studio-byd
+Environment=TZ=Australia/Melbourne
+Environment=DEALERSTUDIO_BACKEND_ROOT=/var/www/shaun-backend
+Environment=PYTHONDONTWRITEBYTECODE=1
+UMask=0077
+Nice=10
+TimeoutStartSec=45min
+ExecStart=/usr/bin/flock -n -E 75 /var/www/dealer-studio-byd/.runtime/sync.lock /usr/bin/flock -w 1200 -E 75 /var/www/shaun-backend/.runtime/clients-sync.lock /var/www/dealer-studio-byd/.venv/bin/python /var/www/dealer-studio-byd/run_hourly.py
+SuccessExitStatus=75

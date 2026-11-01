@@ -16,8 +16,14 @@ import json
 import time
 import math
 import glob
+import re
+import tempfile
+import uuid
+from datetime import datetime, timezone
+from pathlib import Path
 import httpx
 from dotenv import load_dotenv
+from dealerstudio_session import DealerStudioSession, AuthenticationRequired
 
 load_dotenv()
 
@@ -68,9 +74,11 @@ def fetch_with_retry(client: httpx.Client, url: str, params: dict = None, retrie
                 log(f"    [WARN] Status {resp.status_code} on {url}")
                 return {"status_code": resp.status_code, "error": resp.text[:500]}
         except Exception as exc:
+            if isinstance(exc, AuthenticationRequired):
+                raise
             log(f"    [RETRY {attempt}/{retries}] Error: {exc}")
             time.sleep(1.5 * attempt)
-    return {"error": "Failed after retries"}
+    raise RuntimeError('Dealer Studio fetch failed after retries; previous data was preserved.')
 
 
 def harvest_lead_clusters(client: httpx.Client, active_only: bool = False):
@@ -112,11 +120,10 @@ def harvest_lead_clusters(client: httpx.Client, active_only: bool = False):
         data = fetch_with_retry(client, url, params)
 
         if not isinstance(data, dict) or "lead_clusters" not in data:
-            log(f"    [!] Unexpected response on page {page}: {data}")
-            break
+            raise RuntimeError(f'Invalid lead page {page}; previous data was preserved.')
 
         clusters = data.get("lead_clusters", [])
-        total_count = data.get("total_count", 0)
+        total_count = int(data.get("total_count", 0))
         has_more = data.get("has_more", False)
         cursor = data.get("next_cursor")
 
@@ -132,6 +139,10 @@ def harvest_lead_clusters(client: httpx.Client, active_only: bool = False):
 
         page += 1
         time.sleep(0.3)  # Gentle delay
+
+    ids = [row.get('id') for row in all_clusters]
+    if len(all_clusters) != total_count or any(value is None for value in ids) or len(set(ids)) != len(ids):
+        raise RuntimeError('Lead pagination was incomplete or repeated; previous data was preserved.')
 
     # Save consolidated files (dynamic count, canonical, and legacy compatibility)
     total_harvested = len(all_clusters)
@@ -173,11 +184,21 @@ def harvest_cars_and_details(client: httpx.Client):
             pass
 
     url = f"{BASE_URL}/dealerships/{DEALERSHIP_SLUG}/cars"
-    cars_data = fetch_with_retry(client, url, {"per_page": 100})
-
-    if not isinstance(cars_data, list):
-        log(f"[!] Failed to fetch cars: {cars_data}")
-        return []
+    cars_data = []
+    known_cars = set()
+    page = 1
+    while True:
+        rows = fetch_with_retry(client, url, {"per_page": 100, "page": page})
+        if not isinstance(rows, list):
+            raise RuntimeError('Dealer Studio did not return a valid inventory list.')
+        for car in rows:
+            if car.get('id') is None or str(car['id']) in known_cars:
+                raise RuntimeError('Inventory pagination returned missing or repeated IDs.')
+            known_cars.add(str(car['id']))
+        cars_data.extend(rows)
+        if len(rows) < 100:
+            break
+        page += 1
 
     log(f"[OK] Found {len(cars_data)} vehicles in stock. Saving inventory list...")
     # Dynamic, canonical, and legacy inventory files
@@ -199,9 +220,12 @@ def harvest_cars_and_details(client: httpx.Client):
 
         detail_url = f"{BASE_URL}/dealerships/{DEALERSHIP_SLUG}/cars/{car_id}"
         details = fetch_with_retry(client, detail_url)
+        if not isinstance(details, dict) or details.get('id') != car_id:
+            raise RuntimeError(f'Detailed car response did not match the requested car {car_id}.')
         detailed_cars.append(details)
 
-        car_file = os.path.join(CARS_DIR, f"car_{car_id}_{model}.json")
+        safe_model = re.sub(r'[^A-Za-z0-9_-]', '_', str(model))
+        car_file = os.path.join(CARS_DIR, f"car_{car_id}_{safe_model}.json")
         safe_save_json(car_file, details)
         time.sleep(0.2)
 
@@ -211,7 +235,7 @@ def harvest_cars_and_details(client: httpx.Client):
     return detailed_cars
 
 
-def main():
+def _harvest():
     log("=" * 75)
     log(f"DEALER STUDIO - COMPLETE FULL DATA HARVESTER")
     log(f"Dealership: {DEALERSHIP_SLUG} (ID: {DEALERSHIP_ID})")
@@ -220,7 +244,8 @@ def main():
 
     start_time = time.time()
 
-    with httpx.Client(timeout=30.0, follow_redirects=True) as client:
+    with DealerStudioSession() as client:
+        client.renew()
         # 1. Harvest ALL leads (all pages)
         all_leads = harvest_lead_clusters(client, active_only=False)
 
@@ -233,6 +258,8 @@ def main():
         # 4. Generate Master Manifest
         elapsed = round(time.time() - start_time, 2)
         manifest = {
+            "complete": True,
+            "fetchedAt": datetime.now(timezone.utc).isoformat(),
             "timestamp": time.strftime("%Y-%m-%d %H:%M:%S"),
             "dealership_slug": DEALERSHIP_SLUG,
             "dealership_id": DEALERSHIP_ID,
@@ -269,5 +296,43 @@ def main():
     log("=" * 75)
 
 
+def main():
+    global BASE_DATA_DIR, LEADS_PAGES_DIR, CARS_DIR
+    root = Path(__file__).resolve().parent
+    destination = Path(os.environ.get('DEALERSTUDIO_OUTPUT_DIR') or root / 'api_data').resolve()
+    if not destination.is_relative_to(root) or destination == root:
+        raise RuntimeError('The output directory must remain inside this project.')
+    runtime = root / '.runtime'
+    runtime.mkdir(exist_ok=True, mode=0o700)
+    stage = Path(tempfile.mkdtemp(prefix='harvest-', dir=runtime)).resolve()
+    BASE_DATA_DIR = str(stage)
+    LEADS_PAGES_DIR = str(stage / 'lead_clusters_pages')
+    CARS_DIR = str(stage / 'cars_detailed')
+    Path(LEADS_PAGES_DIR).mkdir()
+    Path(CARS_DIR).mkdir()
+    _harvest()
+    manifest = json.loads((stage / 'COMPLETE_DATA_MANIFEST.json').read_text(encoding='utf8'))
+    if manifest['statistics']['total_historic_leads'] < 1:
+        raise RuntimeError('An empty harvest was not published.')
+    backup = runtime / ('api-data-before-' + time.strftime('%Y%m%dT%H%M%S') + '-' + uuid.uuid4().hex[:8])
+    # Verify both absolute paths before moving any directory on Windows.
+    if not all(p.resolve().is_relative_to(root) for p in (stage, destination, backup)):
+        raise RuntimeError('Harvest directories must remain inside this project.')
+    if destination.exists():
+        destination.rename(backup)
+    try:
+        stage.rename(destination)
+    except Exception:
+        if backup.exists():
+            backup.rename(destination)
+        raise
+    log(f'Validated updated data published to {destination}; previous data backed up at {backup}.')
+    return manifest
+
+
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except Exception as error:
+        log(f'FAILED: {error}')
+        raise SystemExit(1)

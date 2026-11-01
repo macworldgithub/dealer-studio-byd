@@ -22,6 +22,7 @@ ENV/
 logs/
 results.json
 endpoint_check.json
+.runtime/
 
 # Operating System & IDE
 .DS_Store
