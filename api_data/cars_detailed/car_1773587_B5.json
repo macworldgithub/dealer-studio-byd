@@ -59,8 +59,8 @@
   "path": "/cars/demo-blue-2025-denza-b5-5061619",
   "status": "in_stock",
   "dealership_slug": "denza-melbourne",
-  "views": 131,
-  "days_old": 179,
+  "views": 317,
+  "days_old": 200,
   "seats": 5,
   "drive": "4X4 Dual Range",
   "doors": 5,
@@ -287,6 +287,7 @@
   "motor_number_front": null,
   "model_year": 2025,
   "price_changes_count": 2,
+  "exclusive_price": null,
   "variant": {
     "ancaprating": "5",
     "fuelconsumptioncombined": 1,
@@ -653,7 +654,7 @@
       "long": "144.9638509",
       "map_key": "m3gwj4tdym8fcbc4g52q1jvzpxn2",
       "place_id": "ChIJeUkE9qpC1moR_UYZC6W0uMo",
-      "place_url": "https://maps.google.com/?q=place_id:ChIJeUkE9qpC1moR_UYZC6W0uMo"
+      "place_url": "https://www.google.com/maps/search/?api=1&query=210+Kings+Way%2C+South+Melbourne%2C+VIC%2C+3205&query_place_id=ChIJeUkE9qpC1moR_UYZC6W0uMo"
     },
     "contact_detail": {
       "phone": "03 8904 8888",
@@ -715,5 +716,6 @@
       ]
     },
     "location_external_codes": []
-  }
+  },
+  "manufacturer_cpo_configured": false
 }
