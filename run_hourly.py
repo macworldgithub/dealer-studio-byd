@@ -14,13 +14,25 @@ from dotenv import dotenv_values
 from dealerstudio_session import ROOT, atomic_json
 
 
+class CommandFailure(RuntimeError):
+    def __init__(self, message, retryable=False):
+        super().__init__(message)
+        self.retryable = retryable
+
+
 def execute(args, env):
     result = subprocess.run(args, cwd=ROOT, env=env, text=True, encoding='utf8', capture_output=True)
     if result.returncode:
         # Detailed output stays in a private file rather than the public status receipt.
         atomic_json(ROOT / '.runtime/last-command-error.json', {'script': Path(args[1]).name, 'exit': result.returncode,
                     'stdout': result.stdout, 'stderr': result.stderr})
-        raise RuntimeError(f'{Path(args[1]).name} failed (exit {result.returncode}); see .runtime/last-command-error.json. Previous published data was retained.')
+        try:
+            failure = json.loads(result.stdout.strip())
+        except ValueError:
+            failure = {}
+        retryable = Path(args[1]).name == 'import_dealerstudio.py' and failure.get('error') in {
+            'NetworkTimeout', 'AutoReconnect', 'ConnectionFailure', 'ServerSelectionTimeoutError', 'CursorNotFound'}
+        raise CommandFailure(f'{Path(args[1]).name} failed (exit {result.returncode}); see .runtime/last-command-error.json. Previous published data was retained.', retryable)
     return result.stdout
 
 
@@ -34,7 +46,7 @@ def remove_previous(previous, runtime):
         shutil.rmtree(target)
 
 
-def run(backend, runtime, command=execute, env=None):
+def run(backend, runtime, command=execute, env=None, sleep=time.sleep):
     backend, runtime = Path(backend).resolve(), Path(runtime).resolve()
     if not runtime.is_relative_to(ROOT / '.runtime'):
         raise ValueError('The sync runtime must remain inside the project .runtime directory.')
@@ -58,11 +70,23 @@ def run(backend, runtime, command=execute, env=None):
         manifest = json.loads((pending / 'COMPLETE_DATA_MANIFEST.json').read_text(encoding='utf8'))
         if manifest.get('complete') is not True:
             raise RuntimeError('The harvester did not verify a complete snapshot.')
-        args = [str(python), str(importer), '--input', str(pending), '--require-fresh']
-        plan = json.loads(command([*args, '--dry-run'], config).strip())
-        if plan.get('conflicts'):
-            raise RuntimeError('Database source identities are ambiguous; no import was applied.')
-        result = json.loads(command([*args, '--backup', str(backup)], config).strip())
+        args = [str(python), str(importer), '--input', str(pending), '--require-fresh', '--progress', str(runtime / 'database-progress.json')]
+        # The importer validates the complete plan and conflicts before backing up
+        # or writing. Avoid downloading the same collections in a second dry run.
+        for attempt in range(1, 4):
+            if attempt > 1:
+                backup = backups / ('dealerstudio-before-' + datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ') + '-' + uuid.uuid4().hex + '.ejson.gz')
+            status.update(phase='database_import', attempt=attempt, backup=str(backup))
+            atomic_json(status_file, status)
+            try:
+                result = json.loads(command([*args, '--backup', str(backup)], config).strip())
+                break
+            except CommandFailure as error:
+                if not error.retryable or attempt == 3:
+                    raise
+                status.update(phase='retrying_database', lastTransientError=str(error))
+                atomic_json(status_file, status)
+                sleep(5 * attempt)
         if not result.get('verified') or result.get('second_run_changes') != 0:
             raise RuntimeError('The database upsert did not pass verification.')
         if snapshot.exists():

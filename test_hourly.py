@@ -2,9 +2,11 @@ import json
 import os
 import tempfile
 import unittest
+from types import SimpleNamespace
+from unittest.mock import patch
 from pathlib import Path
 from dealerstudio_session import ROOT
-from run_hourly import run, remove_previous
+from run_hourly import run, remove_previous, CommandFailure, execute
 
 
 class HourlyTests(unittest.TestCase):
@@ -47,7 +49,7 @@ class HourlyTests(unittest.TestCase):
             return json.dumps({'verified': True, 'second_run_changes': 0, 'modified_clients': 1})
         result = run(self.backend, self.runtime, command)
         self.assertEqual(result['status'], 'succeeded')
-        self.assertEqual(len(calls), 3)
+        self.assertEqual(len(calls), 2)
         self.assertTrue(json.loads((self.data / 'COMPLETE_DATA_MANIFEST.json').read_text())['complete'])
         self.assertTrue((self.runtime / 'data.previous/COMPLETE_DATA_MANIFEST.json').is_file())
 
@@ -76,6 +78,49 @@ class HourlyTests(unittest.TestCase):
 
     def test_rotation_refuses_paths_outside_owned_generated_snapshot(self):
         with self.assertRaises(RuntimeError): remove_previous(ROOT / 'api_data', self.runtime)
+
+    def test_transient_database_failure_replans_with_a_new_backup_then_publishes(self):
+        attempts, backups, delays = [], [], []
+        def command(args, env):
+            if args[1].endswith('fetch_complete_data.py'):
+                pending = Path(env['DEALERSTUDIO_OUTPUT_DIR'])
+                pending.mkdir()
+                (pending / 'COMPLETE_DATA_MANIFEST.json').write_text(json.dumps({'complete': True, 'statistics': {}}))
+                return ''
+            attempts.append(args)
+            backups.append(args[args.index('--backup') + 1])
+            self.assertNotIn('--dry-run', args)
+            self.assertIn('--progress', args)
+            if len(attempts) == 1:
+                raise CommandFailure('fixture network timeout', retryable=True)
+            return json.dumps({'verified': True, 'second_run_changes': 0})
+        result = run(self.backend, self.runtime, command, sleep=delays.append)
+        self.assertEqual(result['status'], 'succeeded')
+        self.assertEqual(result['attempt'], 2)
+        self.assertNotEqual(backups[0], backups[1])
+        self.assertEqual(delays, [5])
+
+    def test_validation_failures_are_not_retried_or_published(self):
+        attempts = []
+        def command(args, env):
+            if args[1].endswith('fetch_complete_data.py'):
+                pending = Path(env['DEALERSTUDIO_OUTPUT_DIR'])
+                pending.mkdir()
+                (pending / 'COMPLETE_DATA_MANIFEST.json').write_text(json.dumps({'complete': True}))
+                return ''
+            attempts.append(args)
+            raise CommandFailure('fixture validation failure')
+        with self.assertRaises(CommandFailure): run(self.backend, self.runtime, command)
+        self.assertEqual(len(attempts), 1)
+        self.assertTrue(json.loads((self.data / 'COMPLETE_DATA_MANIFEST.json').read_text())['old'])
+
+    def test_execute_retries_only_recognized_database_connection_errors(self):
+        for error, retryable in [('NetworkTimeout', True), ('AutoReconnect', True), ('ValueError', False), ('BulkWriteError', False)]:
+            result = SimpleNamespace(returncode=1, stdout=json.dumps({'error': error}), stderr='')
+            with self.subTest(error=error), patch('run_hourly.subprocess.run', return_value=result), patch('run_hourly.atomic_json'):
+                with self.assertRaises(CommandFailure) as caught:
+                    execute(['python', 'import_dealerstudio.py'], {})
+                self.assertEqual(caught.exception.retryable, retryable)
 
 
 if __name__ == '__main__':
